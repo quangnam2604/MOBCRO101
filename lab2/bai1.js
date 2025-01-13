@@ -1,14 +1,30 @@
-const players = [
-    { name: 'Messi', goals: 30 },
-    { name: 'Ronaldo', goals: 28 },
-    { name: 'Neymar', goals: 22 },
-    { name: 'Mbappé', goals: 25 },
-    { name: null, goals: 15 },
-    { name: 'Suarez', goals: null },
-    { name: 'Griezmann', goals: undefined }
-];
+function processNumbers(a, b) {
+    // Đảm bảo a luôn nhỏ hơn b
+    if (a > b) {
+        [a, b] = [b, a];
+    }
 
-// Lọc các cầu thủ có cả name và goals
-const filteredPlayers = players.filter(player => player && player.name && player.goals);
+    // Tính số lượng số chẵn và số lẻ
+    let evenCount = 0, oddCount = 0;
+    for (let i = a; i <= b; i++) {
+        if (i % 2 === 0) {
+            evenCount++;
+        } else {
+            oddCount++;
+        }
+    }
 
-console.log(filteredPlayers);
+    // In kết quả
+    console.log(`Số lượng số chẵn trong khoảng ${a} đến ${b}: ${evenCount}`);
+    console.log(`Số lượng số lẻ trong khoảng ${a} đến ${b}: ${oddCount}`);
+
+    // In các số từ 2 đến 10
+    console.log("Các số từ 2 đến 10:");
+    for (let i = 2; i <= 10; i++) {
+        process.stdout.write(i + " ");
+    }
+    console.log();
+}
+
+// Gọi hàm ví dụ
+processNumbers(3, 15);
