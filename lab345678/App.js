@@ -1,8 +1,12 @@
-import react from "react";
+import React, {useState} from "react";
+import { SafeAreaView } from 'react-native';
+import Splash from "./Assignment/Login";
 
-import Lab3 from "./lab3";
 const App = () => {
-  return <Lab3></Lab3>;
+  return (
+    <SafeAreaView>
+      <Splash></Splash>
+    </SafeAreaView>
+  );
 };
-
 export default App;
