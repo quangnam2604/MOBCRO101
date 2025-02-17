@@ -21,6 +21,10 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "devDependencies": {
+  "@react-native-community/cli": "latest"
+},
+    
     "web": {
       "favicon": "./assets/favicon.png"
     }
