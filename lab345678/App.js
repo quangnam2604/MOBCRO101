@@ -1,78 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { View, Button, SafeAreaView, ScrollView, Text } from "react-native";
-import * as Font from "expo-font";
+// App.js
 
-// Import các bài lab
-import Bai5_1 from "./Lab5/bai1";
-import Bai5_2 from "./Lab5/bai2";
-import Bai5_3 from "./Lab5/bai3";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import DrawerNavigator from './Lab6/DrawerNavigator';
+import DetailsScreen from './Lab6/DetailsScreen';
 
-const loadFonts = async () => {
-  await Font.loadAsync({
-    "Shafarik-Regular": require("./assets/fonts/Shafarik-Regular.ttf"),
-  });
-};
+const Stack = createStackNavigator();
 
-const screens = [
-  {
-    id: 1,
-    title: "Bai1 Lab5",
-    component: (
-      <ScrollView>
-        <Bai5_1 />
-      </ScrollView>
-    ),
-  },
-  {
-    id: 2,
-    title: "Bai2 Lab 5",
-    component: (
-      <ScrollView>
-        <Bai5_2 />
-      </ScrollView>
-    ),
-  },
-  {
-    id: 3,
-    title: "Bai3 Lab 5",
-    component: (
-      <ScrollView>
-        <Bai5_3 />
-      </ScrollView>
-    ),
-  },
-];
-
-const App = () => {
-  const [screen, setScreen] = useState(1);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    loadFonts().then(() => setFontsLoaded(true));
-  }, []);
-
-  if (!fontsLoaded) {
-    return <Text>Loading fonts...</Text>;
-  }
-
+export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      {/* Hiển thị màn hình hiện tại */}
-      <View style={{ flex: 1 }}>{screens.find((s) => s.id === screen)?.component}</View>
-
-      {/* Thanh button chuyển màn hình */}
-      <View style={{ flexDirection: "row", justifyContent: "space-around", padding: 10 }}>
-        {screens.map((s) => (
-          <Button
-            key={s.id}
-            title={s.title}
-            onPress={() => setScreen(s.id)}
-            color="red"  
-                      />
-        ))}
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Drawer">
+        {/* Drawer Navigator */}
+        <Stack.Screen 
+          name="Drawer" 
+          component={DrawerNavigator} 
+          options={{ headerShown: false }} 
+        />
+        
+        {/* Stack Screen for Details */}
+        <Stack.Screen 
+          name="DetailsStack" 
+          component={DetailsScreen} 
+          options={{ title: 'Detail Information' }} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-export default App;
+}
