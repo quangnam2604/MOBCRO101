@@ -1,19 +1,27 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from "./Lab7/Home"; // Import màn hình Home
-import TopTabs from "./Lab7/Bai3"; // Import màn hình có Tab
+import UserListScreen from './lab8bai3/ListUser';
+import EditUserScreen from './lab8bai3/UpdateUser';
+import UserDetailScreen from './lab8bai3/UserDetailScreen';
+import CreateUserScreen from './lab8bai3/CreateUser';
+const Stack = createNativeStackNavigator();
 
-const Stack = createStackNavigator();
-
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: "#6200EE" }, headerTintColor: "#FFF" }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Document" component={TopTabs} />
-        <Stack.Screen name="Chat" component={TopTabs} />
+      <Stack.Navigator initialRouteName="UserList">
+        <Stack.Screen name="UserList" component={UserListScreen} options={{ title: 'Danh sách người dùng' }} />
+        <Stack.Screen name="EditUser" component={EditUserScreen} options={{ title: 'Chỉnh sửa người dùng' }} />
+        <Stack.Screen name="CreateUser" component={CreateUserScreen} options={{ title: 'Tạo người dùng' }} />
+        <Stack.Screen
+          name="UserDetail"
+          component={UserDetailScreen}
+          options={{ title: 'Chi tiết người dùng' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;
